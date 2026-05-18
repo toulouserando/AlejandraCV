@@ -1,12 +1,11 @@
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Download } from "lucide-react"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
-// On remonte de 3 niveaux pour sortir de src et atteindre la racine du projet
-import profilePic from "../../../data/images/Alejandra5.jpg"
-
 export function Hero() {
+  const profileImg = PlaceHolderImages.find(img => img.id === 'profile-pic')
   const bgPattern = PlaceHolderImages.find(img => img.id === 'bg-pattern')
 
   return (
@@ -71,10 +70,11 @@ export function Hero() {
             <div className="absolute inset-0 border-2 border-accent/20 rounded-[2rem] -rotate-3 -z-10" />
             <div className="relative w-full h-full overflow-hidden rounded-[2rem] shadow-2xl border-4 border-white">
               <Image
-                src={profilePic}
-                alt="Alejandra Erazo Moreno"
+                src={profileImg?.imageUrl || "https://picsum.photos/seed/alejandra-art/800/800"}
+                alt={profileImg?.description || "Alejandra Erazo Moreno"}
                 fill
                 className="object-cover"
+                data-ai-hint={profileImg?.imageHint || "watercolor portrait"}
                 priority
               />
             </div>
