@@ -1,0 +1,16 @@
+{
+  "placeholderImages": [
+    {
+      "id": "profile-pic",
+      "description": "Portrait illustré à l'aquarelle d'Alejandra Erazo Moreno",
+      "imageUrl": "https://picsum.photos/seed/alejandra-art/800/800",
+      "imageHint": "watercolor portrait"
+    },
+    {
+      "id": "bg-pattern",
+      "description": "Motif d'arrière-plan artistique aquarelle",
+      "imageUrl": "https://picsum.photos/seed/watercolor-texture/400/400",
+      "imageHint": "watercolor pattern"
+    }
+  ]
+}
