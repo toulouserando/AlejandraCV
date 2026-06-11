@@ -31,14 +31,16 @@ export default function AboutPage() {
             <div className="md:col-span-1 space-y-6">
               <div className="relative aspect-square overflow-hidden rounded-3xl shadow-xl border-4 border-white">
 <div className="relative overflow-hidden rounded-3xl shadow-xl border-4 border-white">
-  <Image
-    src="/data/images/photo_aiguille.jpg"
-    alt="Alejandra Erazo Moreno"
-    width={800}
-    height={800}
-    className="w-full h-auto object-cover"
-    priority
-  />
+<Image
+  src={photoAiguille} // Utilise l'import statique
+  alt="Alejandra Erazo Moreno"
+  // Note : Avec un import statique, Next.js détecte automatiquement width et height, 
+  // mais vous pouvez les laisser si vous voulez forcer le rendu.
+  width={800}
+  height={800}
+  className="w-full h-auto object-cover"
+  priority
+/>
 </div>
               </div>
               <div className="bg-primary/5 p-6 rounded-2xl space-y-4 border border-primary/10">
