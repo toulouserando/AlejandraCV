@@ -32,7 +32,7 @@ export function Hero() {
               <span className="text-primary">Erazo Moreno</span>
             </h1>
             <p className="font-headline text-2xl text-accent font-medium italic">
-              Enseignante de Langues & Accompagnante Éducative Petite Enfance
+              Enseignante de Langues, Accompagnante Éducative Petite Enfance & Professionnelle de la Relation Client
             </p>
           </div>
           
