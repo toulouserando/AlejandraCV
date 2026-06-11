@@ -29,13 +29,16 @@ export default function AboutPage() {
             {/* Sidebar with Image */}
             <div className="md:col-span-1 space-y-6">
               <div className="relative aspect-square overflow-hidden rounded-3xl shadow-xl border-4 border-white">
-<Image
-  src="/data/images/photo_aiguille.jpg"
-  alt="Alejandra Erazo Moreno"
-  width={800}
-  height={800}
-  className="object-cover"
-/>
+<div className="relative overflow-hidden rounded-3xl shadow-xl border-4 border-white">
+  <Image
+    src="/data/images/photo_aiguille.jpg"
+    alt="Alejandra Erazo Moreno"
+    width={800}
+    height={800}
+    className="w-full h-auto object-cover"
+    priority
+  />
+</div>
               </div>
               <div className="bg-primary/5 p-6 rounded-2xl space-y-4 border border-primary/10">
                 <h3 className="font-bold text-lg text-primary">Identité</h3>
