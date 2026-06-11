@@ -21,8 +21,7 @@ export default function AboutPage() {
               À propos d'Alejandra
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Bienvenue sur la présentation officielle du CV d'Alejandra Erazo Moreno, 
-              un parcours dédié à l'éducation, l'éveil et le service.
+              Bienvenue sur la présentation officielle du CV d'Alejandra Erazo Moreno, un parcours polyvalent dédié à l'éducation, l'éveil, l'organisation et le service.
             </p>
           </div>
 
@@ -30,12 +29,13 @@ export default function AboutPage() {
             {/* Sidebar with Image */}
             <div className="md:col-span-1 space-y-6">
               <div className="relative aspect-square overflow-hidden rounded-3xl shadow-xl border-4 border-white">
-                <Image
-                  src={profileImg?.imageUrl || "https://picsum.photos/seed/alejandra-art/800/800"}
-                  alt="Alejandra Erazo Moreno"
-                  fill
-                  className="object-cover"
-                />
+<Image
+  src="/data/images/photo_aiguille.jpg"
+  alt="Alejandra Erazo Moreno"
+  width={800}
+  height={800}
+  className="object-cover"
+/>
               </div>
               <div className="bg-primary/5 p-6 rounded-2xl space-y-4 border border-primary/10">
                 <h3 className="font-bold text-lg text-primary">Identité</h3>
@@ -62,15 +62,18 @@ export default function AboutPage() {
                 <h2 className="font-headline text-3xl font-bold mb-4">Une Passion pour la Transmission</h2>
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   Ce site est bien plus qu'une simple liste d'expériences ; il s'agit d'une immersion dans mon univers professionnel. 
-                  D'origine colombienne et installée à Toulouse, j'ai bâti mon parcours sur la conviction que l'apprentissage 
-                  et l'accompagnement sont les clés du développement humain.
+                  D'origine colombienne et installée à Toulouse, j'ai bâti mon parcours sur la conviction que l'apprentissage, 
+                  l'accompagnement et l'écoute sont les clés du développement humain et relationnel.
                 </p>
-                
+
                 <h3 className="font-headline text-2xl font-bold mb-3">Ma Vision</h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  Que ce soit pour enseigner une langue vivante à des adolescents ou pour veiller à l'épanouissement 
-                  des tout-petits en crèche, ma démarche reste la même : bienveillance, rigueur et adaptation. 
-                  Mon expérience internationale m'a dotée d'une flexibilité unique et d'un sens aigu de la relation client.
+                  Que ce soit pour enseigner une langue vivante, veiller à l'épanouissement des tout-petits en crèche, 
+                  ou gérer les exigences du commerce de détail, ma démarche reste la même : bienveillance, rigueur et adaptation.
+                  Mon expérience internationale m'a dotée d'une flexibilité unique et me permet aujourd'hui d'évoluer avec aisance en français, en anglais et en espagnol.
+                  Mon parcours s'enrichit de 5 années d'expérience dans le secteur de la vente et du prêt-à-porter (Kenzo Jeans). 
+                  Cette facette de mon parcours m'a dotée d'une solide expertise en gestion d'espace (création visuelle, organisation), en logistique (stocks, inventaires)
+                  et d'un sens aigu de la relation client et de l'accueil.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
@@ -80,7 +83,7 @@ export default function AboutPage() {
                         <Globe className="w-5 h-5" />
                         <span className="font-bold">Multiculturelle</span>
                       </div>
-                      <p className="text-xs text-muted-foreground">Expériences en Colombie, aux États-Unis et en France.</p>
+                      <p className="text-xs text-muted-foreground">Expériences riches et variées en Colombie, aux États-Unis et en France.</p>
                     </CardContent>
                   </Card>
                   <Card className="border-none bg-secondary/20 shadow-none">
