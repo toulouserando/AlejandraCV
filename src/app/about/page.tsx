@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { BookOpen, Heart, Globe, Star } from "lucide-react"
 import Image from "next/image"
+import photoAiguille from "@/data/images/photo_aiguille.jpg"
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 
 export default function AboutPage() {
