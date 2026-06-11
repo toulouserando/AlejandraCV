@@ -94,6 +94,35 @@ export const EXPERIENCES: Experience[] = [
     category: 'pedagogy',
     description: ['Cours d\'espagnol et français axés sur la lecture et l\'écriture.'],
     qualities: ['Passionnée', 'Studieuse']
+  },
+  {
+    id: 'exp_kenzo', // <-- NOUVELLE EXPÉRIENCE KENZO JEANS
+    title: 'Vendeuse, conseillère clientèle & visuelle',
+    organization: 'KENZO JEANS',
+    location: 'Colombie', 
+    period: '2006 - 2011',
+    category: 'commerce',
+    description: [
+      'Création visuelle des vitrines pour les nouvelles collections de vêtements et d’accessoires.',
+      'Responsable de l’organisation globale du magasin, pliage rigoureux et mise en valeur de la marque.',
+      'Gestion des stocks, réalisation des inventaires et classement en réserve comme en magasin.',
+      'Accueil chaleureux, conseil client personnalisé et fidélisation de la clientèle.'
+    ],
+    qualities: ['Organisée', 'Stable', 'Polyvalente', 'Dynamique']
+  },
+  {
+    id: 'exp_sabana', // <-- NOUVELLE EXPÉRIENCE TRAIN DE LA SABANA
+    title: 'Animatrice du Train de la Sabana',
+    organization: 'TRAIN DE LA SABANA',
+    location: 'Bogotá, Colombie',
+    period: '2005 - 2006',
+    category: 'childhood', // Idéal ici car orienté animation, encadrement et éveil des enfants
+    description: [
+      'Responsable de l’encadrement des enfants et des adolescents voyageant à bord du train.',
+      'Conception et animation d’activités ludiques : jeux, chansons et spectacles de marionnettes.',
+      'Médiation culturelle : présentation guidée et explication des lieux et paysages tout au long du parcours.'
+    ],
+    qualities: ['Joueuse', 'Communicative', 'Enthousiaste']
   }
 ];
 
