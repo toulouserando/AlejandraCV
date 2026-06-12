@@ -61,6 +61,7 @@ export const EXPERIENCES: Experience[] = [
     description: ['Accompagner les enfants dans leur développement moteur, cognitif et du langage.'],
     qualities: ['Patiente', 'Éveillée', 'Douce']
   },
+  /*
   {
     id: 'exp4',
     title: 'Conseillère de vente / Vendeuse',
@@ -75,6 +76,7 @@ export const EXPERIENCES: Experience[] = [
     ],
     qualities: ['Réactive', 'Souriante', 'Persuasive']
   },
+  */
   {
     id: 'exp5',
     title: 'Enseignante d\'espagnol (L1)',
