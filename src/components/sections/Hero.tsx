@@ -61,7 +61,7 @@ export function Hero() {
               <div className="flex gap-3 text-sm font-semibold mt-1">
                 <span>Espagnol (L1)</span>
                 <span className="text-border">|</span>
-                <span>Français (C2)</span>
+                <span>Français (B2)</span>
                 <span className="text-border">|</span>
                 <span>Anglais (B2)</span>
               </div>
