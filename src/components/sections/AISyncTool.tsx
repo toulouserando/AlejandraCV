@@ -4,29 +4,53 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { skillSynchronizer, type SkillSynchronizerOutput } from "@/ai/flows/skill-synchronizer"
+import type { SkillSynchronizerOutput } from "@/ai/flows/skill-synchronizer"
 import { Brain, Loader2, Sparkles, CheckCircle, Info } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
 
 export function AISyncTool() {
   const [jobDescription, setJobDescription] = useState("")
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<SkillSynchronizerOutput | null>(null)
+  const { toast } = useToast()
 
   const handleSync = async () => {
     if (!jobDescription.trim()) return
     setLoading(true)
+    setResult(null)
+
     try {
-      const output = await skillSynchronizer({ jobDescription })
-      setResult(output)
-    } catch (error) {
+      const res = await fetch("/api/skill-synchronizer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jobDescription }),
+      })
+
+      const data = await res.json()
+
+      if (res.ok) {
+        setResult(data)
+        toast({
+          title: "Analyse terminée !",
+          description: "Le profil a été synchronisé avec la fiche de poste.",
+        })
+      } else {
+        throw new Error(data.error || "Erreur lors de la synchronisation IA")
+      }
+    } catch (error: any) {
       console.error("AI Error:", error)
+      toast({
+        variant: "destructive",
+        title: "Erreur d'analyse",
+        description: error.message || "Impossible d'analyser la fiche de poste.",
+      })
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <section id="ai-sync" className="py-24 px-6 bg-accent/5">
+    <section id="synchroniseur" className="py-24 px-6 bg-accent/5">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">
@@ -56,7 +80,7 @@ export function AISyncTool() {
               />
               <Button 
                 onClick={handleSync} 
-                disabled={loading || !jobDescription}
+                disabled={loading || !jobDescription.trim()}
                 className="w-full h-12 rounded-full font-bold shadow-md hover:shadow-lg transition-all"
               >
                 {loading ? (
@@ -80,7 +104,7 @@ export function AISyncTool() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    {result.relevantSkills.map((skill, i) => (
+                    {result.relevantSkills?.map((skill, i) => (
                       <div key={i} className="text-sm py-1 border-b last:border-0 border-primary/10">
                         {skill}
                       </div>
@@ -94,7 +118,7 @@ export function AISyncTool() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    {result.relevantExperiences.map((exp, i) => (
+                    {result.relevantExperiences?.map((exp, i) => (
                       <div key={i} className="text-sm py-1 border-b last:border-0 border-primary/10 italic">
                         {exp}
                       </div>
