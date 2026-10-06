@@ -43,11 +43,15 @@ export function Hero() {
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <Button size="lg" className="rounded-full gap-2">
-              Voir mon parcours <ArrowRight className="w-4 h-4" />
+            <Button size="lg" className="rounded-full gap-2" asChild>
+              <a href="#experiences">
+                Voir mon parcours <ArrowRight className="w-4 h-4" />
+              </a>
             </Button>
-            <Button size="lg" variant="outline" className="rounded-full gap-2 border-primary text-primary hover:bg-primary/5">
-              Télécharger CV <Download className="w-4 h-4" />
+            <Button size="lg" variant="outline" className="rounded-full gap-2 border-primary text-primary hover:bg-primary/5" asChild>
+              <a href="/CV_Alejandra_Erazo_Moreno.pdf" target="_blank" rel="noopener noreferrer" download>
+                Télécharger CV <Download className="w-4 h-4" />
+              </a>
             </Button>
           </div>
 
