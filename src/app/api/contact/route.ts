@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 
     if (!resendApiKey) {
       return NextResponse.json(
-        { error: 'Clé API Resend non configurée' },
+        { error: "La variable RESEND_API_KEY n'est pas renseignée sur Vercel." },
         { status: 500 }
       )
     }
@@ -26,25 +26,32 @@ export async function POST(request: Request) {
         reply_to: email,
         subject: `[Portfolio] ${subject}`,
         html: `
-          <h3>Nouveau message de contact</h3>
-          <p><strong>Nom :</strong> ${name}</p>
-          <p><strong>Email :</strong> ${email}</p>
-          <p><strong>Objet :</strong> ${subject}</p>
-          <p><strong>Message :</strong></p>
-          <p>${message.replace(/\n/g, '<br>')}</p>
+          <div style="font-family: sans-serif; padding: 20px; line-height: 1.5;">
+            <h2>Nouveau message de contact</h2>
+            <p><strong>Nom :</strong> ${name}</p>
+            <p><strong>Email :</strong> ${email}</p>
+            <p><strong>Objet :</strong> ${subject}</p>
+            <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;" />
+            <p><strong>Message :</strong></p>
+            <p style="white-space: pre-wrap;">${message}</p>
+          </div>
         `,
       }),
     })
 
+    const resData = await res.json()
+
     if (!res.ok) {
-      const errorData = await res.json()
-      return NextResponse.json({ error: errorData }, { status: 400 })
+      return NextResponse.json(
+        { error: resData.message || "Erreur de transfert vers Resend." },
+        { status: res.status }
+      )
     }
 
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (error: any) {
     return NextResponse.json(
-      { error: "Erreur lors de l'envoi de l'email" },
+      { error: error.message || "Erreur serveur lors du traitement." },
       { status: 500 }
     )
   }
