@@ -26,7 +26,7 @@ export function AISyncTool() {
         body: JSON.stringify({ jobDescription }),
       })
 
-      const data = await res.json()
+      const data = await res.json().catch(() => ({}))
 
       if (res.ok) {
         setResult(data)
@@ -104,13 +104,18 @@ export function AISyncTool() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    {result.relevantSkills?.map((skill, i) => (
-                      <div key={i} className="text-sm py-1 border-b last:border-0 border-primary/10">
-                        {skill}
-                      </div>
-                    ))}
+                    {result.relevantSkills && result.relevantSkills.length > 0 ? (
+                      result.relevantSkills.map((skill, i) => (
+                        <div key={i} className="text-sm py-1 border-b last:border-0 border-primary/10">
+                          {skill}
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-sm text-muted-foreground italic">Aucun atout spécifique extrait.</p>
+                    )}
                   </CardContent>
                 </Card>
+
                 <Card className="border-none shadow-md">
                   <CardHeader>
                     <CardTitle className="text-base flex items-center gap-2 text-primary">
@@ -118,11 +123,15 @@ export function AISyncTool() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    {result.relevantExperiences?.map((exp, i) => (
-                      <div key={i} className="text-sm py-1 border-b last:border-0 border-primary/10 italic">
-                        {exp}
-                      </div>
-                    ))}
+                    {result.relevantExperiences && result.relevantExperiences.length > 0 ? (
+                      result.relevantExperiences.map((exp, i) => (
+                        <div key={i} className="text-sm py-1 border-b last:border-0 border-primary/10 italic">
+                          {exp}
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-sm text-muted-foreground italic">Aucune expérience spécifique extraite.</p>
+                    )}
                   </CardContent>
                 </Card>
               </div>
