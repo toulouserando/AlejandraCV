@@ -131,27 +131,34 @@ export const EXPERIENCES: Experience[] = [
 export const EDUCATION: Education[] = [
   {
     id: 'edu1',
+    title: 'Master 2 Espagnol Études Hispano-Américaines (LLCER)',
+    institution: 'Université Toulouse Jean Jaurès',
+    location: 'Toulouse, France',
+    period: '2026 - 2027'
+  },
+  {
+    id: 'edu2',
     title: 'Master 2 Français Langues Étrangères (E2F)',
     institution: 'Université Toulouse Jean Jaurès',
     location: 'Toulouse, France',
     period: '2024 - 2025'
   },
   {
-    id: 'edu2',
+    id: 'edu3',
     title: 'DU Didactique du FLE',
     institution: 'Université Toulouse Jean Jaurès',
     location: 'Toulouse, France',
     period: '2020 - 2021'
   },
   {
-    id: 'edu3',
+    id: 'edu4',
     title: 'CAP Accompagnant Éducatif Petite Enfance',
     institution: 'Kiwi Institute - Académie de Toulouse',
     location: 'Toulouse, France',
     period: '2019 - 2021'
   },
   {
-    id: 'edu4',
+    id: 'edu5',
     title: 'Licence en Éducation (Langues)',
     institution: 'Universidad Libre',
     location: 'Bogotá, Colombie',
