@@ -21,9 +21,9 @@ export function Navbar() {
     { name: "Accueil", href: "/" },
     { name: "À propos", href: "/about" },
     { name: "Personnalité", href: "/personality" },
-    { name: "Expériences", href: "/#experience" },
+    { name: "Expériences", href: "/#experiences" },
     { name: "Formations", href: "/#education" },
-    { name: "Synchroniseur", href: "/#ai-sync" },
+    { name: "Synchroniseur", href: "/#synchroniseur" },
   ]
 
   return (
