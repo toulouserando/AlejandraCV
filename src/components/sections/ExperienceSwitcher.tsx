@@ -5,7 +5,7 @@ import { EXPERIENCES, Experience } from "@/lib/cv-data"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { GraduationCap, Baby, ShoppingBag, MapPin, Calendar } from "lucide-react"
+import { GraduationCap, Baby, ShoppingBag, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function ExperienceSwitcher() {
@@ -20,7 +20,7 @@ export function ExperienceSwitcher() {
   ]
 
   return (
-    <section id="experience" className="py-24 px-6 bg-secondary/30">
+    <section id="experiences" className="py-24 px-6 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-headline text-4xl font-bold mb-4">Parcours Professionnel</h2>
