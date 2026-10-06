@@ -12,7 +12,10 @@ export async function POST(req: Request) {
       )
     }
 
-    const output = await skillSynchronizer({ jobDescription })
+    // Injection d'une consigne de langue stricte dans le texte transmis à l'IA
+    const constrainedJobDescription = `[CONSIGNE OBLIGATOIRE DE LANGUE : Tu dois répondre EXCLUSIVEMENT en français. Traduis tous les mots, concepts et compétences en français, même si la fiche de poste ci-dessous est en anglais.]\n\n${jobDescription}`
+
+    const output = await skillSynchronizer({ jobDescription: constrainedJobDescription })
     return NextResponse.json(output)
   } catch (error: any) {
     console.error("Erreur lors de la synchronisation IA:", error)
