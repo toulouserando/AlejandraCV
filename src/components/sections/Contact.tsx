@@ -15,7 +15,9 @@ export function Contact() {
     e.preventDefault()
     setLoading(true)
 
-    const formData = new FormData(e.currentTarget)
+    // On conserve la référence du formulaire avant tout traitement asynchrone (await)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -30,20 +32,26 @@ export function Contact() {
         body: JSON.stringify(data),
       })
 
+      const result = await res.json().catch(() => ({}))
+
       if (res.ok) {
         toast({
           title: "Message envoyé !",
           description: "Je vous répondrai dans les plus brefs délais.",
         })
-        e.currentTarget.reset()
+        form.reset() // Réinitialisation propre du formulaire
       } else {
-        throw new Error("Erreur lors de l'envoi")
+        const errorDetail =
+          typeof result.error === "string"
+            ? result.error
+            : result.error?.message || "Erreur lors de l'envoi"
+        throw new Error(errorDetail)
       }
-    } catch {
+    } catch (err: any) {
       toast({
         variant: "destructive",
         title: "Erreur",
-        description: "Une erreur est survenue lors de l'envoi du message.",
+        description: err?.message || "Une erreur est survenue lors de l'envoi du message.",
       })
     } finally {
       setLoading(false)
@@ -61,28 +69,32 @@ export function Contact() {
           </p>
 
           <div className="space-y-6">
-            {/* Remplacement de l'email par le quartier / secteur */}
+            {/* Secteur / Quartier */}
             <div className="flex items-center gap-4 group cursor-default">
               <div className="w-12 h-12 rounded-full bg-accent-foreground/10 flex items-center justify-center group-hover:bg-primary transition-colors">
                 <Navigation className="w-5 h-5" />
               </div>
               <div>
-                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">Secteur / Quartier</span>
+                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">
+                  Secteur / Quartier
+                </span>
                 <span className="font-medium">Toulouse Centre & agglomération</span>
               </div>
             </div>
-            
+
             {/* LinkedIn */}
             <div className="flex items-center gap-4 group cursor-default">
               <div className="w-12 h-12 rounded-full bg-accent-foreground/10 flex items-center justify-center group-hover:bg-primary transition-colors">
                 <Linkedin className="w-5 h-5" />
               </div>
               <div>
-                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">LinkedIn</span>
-                <a 
-                  href="https://www.linkedin.com/in/alejandra-erazo-b354251b0/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">
+                  LinkedIn
+                </span>
+                <a
+                  href="https://www.linkedin.com/in/alejandra-erazo-b354251b0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="font-medium hover:underline"
                 >
                   linkedin.com/in/alejandra-erazo
@@ -96,7 +108,9 @@ export function Contact() {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">Localisation</span>
+                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">
+                  Localisation
+                </span>
                 <span className="font-medium">Toulouse, France</span>
               </div>
             </div>
@@ -108,23 +122,50 @@ export function Contact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium opacity-80">Nom</label>
-                <Input name="name" required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
+                <Input
+                  name="name"
+                  required
+                  className="bg-white/10 border-white/10 focus:ring-primary text-white"
+                />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium opacity-80">Email</label>
-                <Input name="email" type="email" required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
+                <Input
+                  name="email"
+                  type="email"
+                  required
+                  className="bg-white/10 border-white/10 focus:ring-primary text-white"
+                />
               </div>
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium opacity-80">Objet</label>
-              <Input name="subject" required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
+              <Input
+                name="subject"
+                required
+                className="bg-white/10 border-white/10 focus:ring-primary text-white"
+              />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium opacity-80">Message</label>
-              <Textarea name="message" required className="bg-white/10 border-white/10 focus:ring-primary text-white min-h-[120px]" />
+              <Textarea
+                name="message"
+                required
+                className="bg-white/10 border-white/10 focus:ring-primary text-white min-h-[120px]"
+              />
             </div>
-            <Button type="submit" disabled={loading} className="w-full py-6 rounded-full font-bold text-lg gap-2">
-              {loading ? "Envoi..." : <><Send className="w-4 h-4" /> Envoyer mon message</>}
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full py-6 rounded-full font-bold text-lg gap-2"
+            >
+              {loading ? (
+                "Envoi..."
+              ) : (
+                <>
+                  <Send className="w-4 h-4" /> Envoyer mon message
+                </>
+              )}
             </Button>
           </form>
         </div>
