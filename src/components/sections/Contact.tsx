@@ -4,25 +4,50 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Linkedin, MapPin, Send } from "lucide-react"
+import { Navigation, Linkedin, MapPin, Send } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 export function Contact() {
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      toast({
-        title: "Message envoyé !",
-        description: "Je vous répondrai dans les plus brefs délais.",
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       })
-      const form = e.target as HTMLFormElement
-      form.reset()
-    }, 1500)
+
+      if (res.ok) {
+        toast({
+          title: "Message envoyé !",
+          description: "Je vous répondrai dans les plus brefs délais.",
+        })
+        e.currentTarget.reset()
+      } else {
+        throw new Error("Erreur lors de l'envoi")
+      }
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Erreur",
+        description: "Une erreur est survenue lors de l'envoi du message.",
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -36,26 +61,36 @@ export function Contact() {
           </p>
 
           <div className="space-y-6">
+            {/* Remplacement de l'email par le quartier / secteur */}
             <div className="flex items-center gap-4 group cursor-default">
               <div className="w-12 h-12 rounded-full bg-accent-foreground/10 flex items-center justify-center group-hover:bg-primary transition-colors">
-                <Mail className="w-5 h-5" />
+                <Navigation className="w-5 h-5" />
               </div>
               <div>
-                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">Email</span>
-                <span className="font-medium">contact@alejandra-cv.fr</span>
+                <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">Secteur / Quartier</span>
+                <span className="font-medium">Toulouse Centre & agglomération</span>
               </div>
             </div>
             
+            {/* LinkedIn */}
             <div className="flex items-center gap-4 group cursor-default">
               <div className="w-12 h-12 rounded-full bg-accent-foreground/10 flex items-center justify-center group-hover:bg-primary transition-colors">
                 <Linkedin className="w-5 h-5" />
               </div>
               <div>
                 <span className="block text-sm text-accent-foreground/50 font-bold uppercase tracking-wider">LinkedIn</span>
-                <span className="font-medium">linkedin.com/in/alejandra-erazo</span>
+                <a 
+                  href="https://www.linkedin.com/in/alejandra-erazo-b354251b0/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="font-medium hover:underline"
+                >
+                  linkedin.com/in/alejandra-erazo
+                </a>
               </div>
             </div>
 
+            {/* Localisation */}
             <div className="flex items-center gap-4 group cursor-default">
               <div className="w-12 h-12 rounded-full bg-accent-foreground/10 flex items-center justify-center group-hover:bg-primary transition-colors">
                 <MapPin className="w-5 h-5" />
@@ -73,20 +108,20 @@ export function Contact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium opacity-80">Nom</label>
-                <Input required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
+                <Input name="name" required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium opacity-80">Email</label>
-                <Input required type="email" className="bg-white/10 border-white/10 focus:ring-primary text-white" />
+                <Input name="email" type="email" required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
               </div>
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium opacity-80">Objet</label>
-              <Input required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
+              <Input name="subject" required className="bg-white/10 border-white/10 focus:ring-primary text-white" />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium opacity-80">Message</label>
-              <Textarea required className="bg-white/10 border-white/10 focus:ring-primary text-white min-h-[120px]" />
+              <Textarea name="message" required className="bg-white/10 border-white/10 focus:ring-primary text-white min-h-[120px]" />
             </div>
             <Button type="submit" disabled={loading} className="w-full py-6 rounded-full font-bold text-lg gap-2">
               {loading ? "Envoi..." : <><Send className="w-4 h-4" /> Envoyer mon message</>}
